@@ -21,16 +21,16 @@ class { '::mysql::server':
     'wordpressuser@192.168.153.143/wordpresstable.*' => {
       ensure     => 'present',
       options    => ['GRANT'],
-      privileges => ['SELECT', 'INSERT', 'UPDATE', 'DELETE'],
+      privileges => ['ALL'],
       table      => 'wordpresstable.*',
       user       => 'wordpressuser@192.168.153.143',
     },
   },
 }
 
-#mysql::db { hiera("dbtable"):
-#  user     => hiera("dbuser"),
-#  password => hiera("dbpass"),
-#  host     => hiera("dbhost"),
-#  grant    => ['SELECT', 'UPDATE'],
-#}
+mysql::db { hiera("dbtable"):
+  user     => hiera("dbuser"),
+  password => hiera("dbpass"),
+  host     => hiera("dbhost"),
+  grant    => ['ALL'],
+}
