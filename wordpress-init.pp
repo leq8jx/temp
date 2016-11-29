@@ -1,5 +1,6 @@
 wordpress::instance { '/opt/wordpress1':
-  db_user     => 'wordpress',
-  db_name     => 'wordpress',
-  db_password => 'wordpress',
+  db_user     => hiera("dbuser"),
+  db_name     => hiera("dbtable"),
+  db_password => hiera("dbpass"),
+  db_host     => hiera("dbhost"),
 }
