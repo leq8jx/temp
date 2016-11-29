@@ -3,9 +3,9 @@ class { '::mysql::server':
   remove_default_accounts => true,
 }
 
-mysql::db { 'wordpress':
-  user     => 'wordpress',
-  password => 'wordpress',
-  host     => localhost,
+mysql::db { hiera("dbtable"):
+  user     => hiera("dbuser"),
+  password => hiera("dbpass"),
+  host     => hiera("dbhost"),
   grant    => ['SELECT', 'UPDATE'],
 }
