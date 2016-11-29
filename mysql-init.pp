@@ -6,15 +6,6 @@ class { '::mysql::server':
       bind-address => '0.0.0.0',
     },
   },
-  
-class { '::mysql::server':
-  root_password           => 'rootpassword',
-  remove_default_accounts => true,
-  override_options        => {
-    mysqld => {
-      bind-address => '0.0.0.0',
-    },
-  },
   users => {
     'wordpressuser@192.168.153.143' => {
       ensure                   => 'present',
