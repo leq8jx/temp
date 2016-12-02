@@ -37,6 +37,6 @@ class { '::mysql::server':
 mysql::db { hiera("dbname"):
   user     => hiera("dbuser"),
   password => hiera("dbpass"),
-  host     => hiera("dbhost"),
+  host     => 'localhost',
   grant    => ['ALL'],
 }
