@@ -1,5 +1,10 @@
+$user = hiera("dbuser")
+$host = hiera("wphost")
+$dbname = hiera("dbname")
+$dbuserathost = "${user}@${wphost}"
+
 class { '::mysql::server':
-  root_password           => 'rootpassword',
+  root_password           => hiera("rootpassword"),
   remove_default_accounts => true,
   override_options        => {
     mysqld => {
@@ -7,28 +12,28 @@ class { '::mysql::server':
     },
   },
   users => {
-    'wordpressuser@192.168.153.143' => {
+    $dbuserathost => {
       ensure                   => 'present',
       max_connections_per_hour => '0',
       max_queries_per_hour     => '0',
       max_updates_per_hour     => '0',
       max_user_connections     => '0',
-      password_hash            => '*CF203ECFFF6DECCDF3155C37B67E906A0F45CBF7',
+      password_hash            => hiera("dbpasshash"),
       tls_options              => ['NONE'],
     },
   },
   grants                  => {
-    'wordpressuser@192.168.153.143/wordpresstable.*' => {
+    "${dbuserathost}/${dbname}.*" => {
       ensure     => 'present',
       options    => ['GRANT'],
       privileges => ['ALL'],
-      table      => 'wordpresstable.*',
-      user       => 'wordpressuser@192.168.153.143',
+      table      => "${dbname}.*",
+      user       => $dbuserathost,
     },
   },
 }
 
-mysql::db { hiera("dbtable"):
+mysql::db { hiera("dbname"):
   user     => hiera("dbuser"),
   password => hiera("dbpass"),
   host     => hiera("dbhost"),
