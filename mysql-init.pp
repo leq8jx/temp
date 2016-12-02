@@ -1,6 +1,6 @@
 $user = hiera("dbuser")
 $dbname = hiera("dbname")
-$dbuserathost = "${user}@*"
+$dbuserathost = "${user}@%"
 
 class { '::mysql::server':
   root_password           => hiera("rootpassword"),
