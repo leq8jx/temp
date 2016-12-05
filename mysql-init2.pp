@@ -1,10 +1,10 @@
 ### Global setttings
-Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
+#Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
 
-$mysql_password = "testing"
-$db_name = "wordpress_db"
-$db_user = "wordpress_user"
-$db_pass = "wordpress"
+$mysql_password = hiera("rootpassword")
+$db_name = hiera("dbname")
+$db_user = hiera("dbuser")
+$db_pass = hiera("dbpass")
 $db_access = "192.168.%.%"
 
 # install and configure mysql-server and configure it to listen on the network
