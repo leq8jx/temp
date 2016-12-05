@@ -9,7 +9,6 @@ $db_host = hiera("mysqlhost")
 # install and configure apache server
 
 class { 'apache':
-	disableboot => false
 }
 
 # install mod-php for apache
