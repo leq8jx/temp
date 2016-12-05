@@ -1,10 +1,10 @@
 ### Global setttings
-Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
+#Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
 
-$db_name = "wordpress_db"
-$db_user = "wordpress_user"
-$db_pass = "wordpress"
-$db_host = "192.168.33.2"
+$db_name = hiera("dbname")
+$db_user = hiera("dbuser")
+$db_pass = hiera("dbpass")
+$db_host = hiera("mysqlhost")
 
 # install and configure apache server
 
