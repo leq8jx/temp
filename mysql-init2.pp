@@ -10,7 +10,7 @@ $db_access = "192.168.%.%"
 # install and configure mysql-server and configure it to listen on the network
 class { '::mysql::server':
   root_password    => $mysql_password,
-  override_options => { 'mysqld' => { 'bind-address' => $ipaddress_eth1 } }
+  override_options => { 'mysqld' => { 'bind-address' => '0.0.0.0' } }
 }
 
 # create the wordpress database and give permission to the wordpress user
