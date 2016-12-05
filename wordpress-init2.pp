@@ -9,6 +9,7 @@ $db_host = hiera("mysqlhost")
 # install and configure apache server
 
 class { 'apache':
+  disableboot => false
 }
 
 # install mod-php for apache
@@ -29,8 +30,8 @@ exec { "enable-php-module":
 }
 
 class { 'wordpress':
-  wp_owner    => 'wwwrun',
-  wp_group    => 'www',
+#  wp_owner    => 'wwwrun',
+#  wp_group    => 'www',
   db_name     => "$db_name",
   db_user        => "$db_user",
   db_password    => "$db_pass",
